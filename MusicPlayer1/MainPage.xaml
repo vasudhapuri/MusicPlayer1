@@ -46,7 +46,7 @@
             <SplitView.Pane>
                     <ListView Name="MenuItemsListView"
                           IsItemClickEnabled="True"
-                          ItemClick="MenuItemsListView_ItemClick"
+                          ItemClick="MenuItemsListView_ItemClick_1"
                              
                     ItemsSource="{x:Bind menuitems}">
                         <ListView.ItemTemplate>
@@ -63,73 +63,71 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                
+                
                 </SplitView.Pane>
 
 
-            <SplitView.Content>
-                
+            <SplitView.Content>                
                 <Grid Margin="20,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
-
-                    <TextBlock Name="CategoryTextBlock"
-                               Text="All Songs"
+                        <TextBlock Name="CategoryTextBlock"
+                               Text="All available Songs"
                                FontSize="25"
                                Grid.Row="0"
-                               Margin="20,-40,0,0"
-                               />
-                    
-                    <Grid Margin="40,40,0,0">
-                        
+                               Margin="20,-40,0,0"/>
+                        <Grid Margin="40,40,0,0">                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
-
-                        
                             <ListView Name="MusicListView"
                                           SelectionMode="None"
                                           IsItemClickEnabled="True"
                                           ItemClick="MusicListView_ItemClick"
-                                          ItemsSource="{x:Bind music}"
-                                         >
-
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="data:Music">
-                                    
-                                    <StackPanel Orientation="Horizontal">
-                                        
-                                            
-
-                                        <Image Name="MyImage"
+                                          ItemsSource="{x:Bind music}">
+                                <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="data:Music">                                    
+                                    <StackPanel Orientation="Horizontal">                                
+                                       <Image Name="MyImage"
                                        Height="100"
                                        Width="100" 
                                        Source="{x:Bind ImageFile}"/>
-
                                             <TextBlock 
                                                 HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                
+                                                VerticalAlignment="Center"                                                
                                                 Text="{x:Bind SongName}" />
-
-
-                                            
-
                                         </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <ListView Name="PlayListView"
+                                          SelectionMode="None"
+                                          IsItemClickEnabled="True"
+                                          ItemClick="PlayListListView_ItemClick"
+                                         ItemsSource="{x:Bind playlist}" >
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="data:PlayList" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Name="MyImage"
+                                       Height="100"
+                                       Width="100" 
+                                       Source="{x:Bind PlayListImage}"/>
+                                            <TextBlock 
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"                                               
+                                                Text="{x:Bind PlayListName}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
 
-
-
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-
-                        <SplitView>
-
+                            <SplitView>
                             <SplitView.Content>
                                 <Grid Margin="0,10,0,0"
                                       HorizontalAlignment="Right" 

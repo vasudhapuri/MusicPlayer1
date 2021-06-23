@@ -30,15 +30,22 @@ namespace MusicPlayer1
     public sealed partial class MainPage : Page
     {
         private ObservableCollection<Music> music;
+        private ObservableCollection<PlayList> playlist;
         public string ImageFile { get; set; }
         public string SongName { get; set; }
         private List<MenuItems> menuitems;
+      
 
         public MainPage()
         {
             this.InitializeComponent();
             music = new ObservableCollection<Music>();
             MusicManager.GetMusics(music);
+
+            playlist=  new ObservableCollection<PlayList>();
+            PlayListManager.GetPlayList(playlist);
+
+          
 
             menuitems = new List<MenuItems>();
             var m1 = new MenuItems();
@@ -104,6 +111,22 @@ namespace MusicPlayer1
             
         }
 
-   
+        private void MenuItemsListView_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            {
+               
+            }
+        }
+
+        private void PlayListListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //ViewManager.Initialize(SongList, playLists);
+            //AllSongsListView.Visibility = Visibility.Collapsed;
+            //PlayListView.Visibility = Visibility.Collapsed;
+            //CreateNewPlaylistView.Visibility = Visibility.Collapsed;
+            //p.GetPlayList(playlist);
+
+
+        }
     }
 }
