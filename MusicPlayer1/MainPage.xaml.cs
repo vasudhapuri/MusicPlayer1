@@ -33,8 +33,9 @@ namespace MusicPlayer1
         private ObservableCollection<PlayList> playlist;
         public string ImageFile { get; set; }
         public string SongName { get; set; }
-        private List<MenuItems> menuitems;
-      
+        private List<MenuItem1> menuitem1;
+        private List<MenuItem2> menuitem2;
+
 
         public MainPage()
         {
@@ -43,21 +44,26 @@ namespace MusicPlayer1
             MusicManager.GetMusics(music);
 
             playlist=  new ObservableCollection<PlayList>();
-            PlayListManager.GetPlayList(playlist);
+            PlayListManager.GetPlayList(playlist);            
 
-          
+           menuitem1 = new List<MenuItem1>();
+           menuitem2 = new List<MenuItem2>();
+            //menuitem1.Add()
+            var m1 = new MenuItem1();
+             m1.category = "My Music";
+             m1.icon = $"Assets/Icons/MyMusic.jfif";
+            menuitem1.Add(m1);
 
-            menuitems = new List<MenuItems>();
-            var m1 = new MenuItems();
-            m1.category = "My Music";
-            m1.icon = $"Assets/Icons/MyMusic.jfif";
-            menuitems.Add(m1);
+             var m2 = new MenuItem2();
+             m2.category = "Playlists";
+             m2.icon = $"Assets/Icons/Playlist.png";
+             menuitem2.Add(m2);
 
-            
-            var m2 = new MenuItems();
-            m2.category = "Playlists";
-            m2.icon = $"Assets/Icons/Playlist.png";
-            menuitems.Add(m2);
+            PlayListView.Visibility = Visibility.Collapsed;
+            MusicListView.Visibility = Visibility.Visible;
+
+
+
         }
 
 
@@ -120,13 +126,33 @@ namespace MusicPlayer1
 
         private void PlayListListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //ViewManager.Initialize(SongList, playLists);
+      
             //AllSongsListView.Visibility = Visibility.Collapsed;
             //PlayListView.Visibility = Visibility.Collapsed;
-            //CreateNewPlaylistView.Visibility = Visibility.Collapsed;
-            //p.GetPlayList(playlist);
+            
+            
 
 
+        }
+
+        private void MenuItem1ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+           
+        }
+
+        private void MyMusic_Click(object sender, RoutedEventArgs e)
+        {
+            PlayListView.Visibility = Visibility.Collapsed;
+            MusicListView.Visibility = Visibility.Visible;
+     
+           
+
+        }
+
+        private void MyPlayLists_Click(object sender, RoutedEventArgs e)
+        {
+            MusicListView.Visibility = Visibility.Collapsed;
+            PlayListView.Visibility = Visibility.Visible;
         }
     }
 }

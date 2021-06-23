@@ -41,16 +41,15 @@
             <SplitView Grid.Row="1"
                    Name="MySpiltView"
                    DisplayMode="CompactOverlay"
-                   CompactPaneLength="50"
-                   OpenPaneLength="250">
+                   CompactPaneLength="150"
+                   OpenPaneLength="150">
             <SplitView.Pane>
-                    <ListView Name="MenuItemsListView"
+                    <!--<ListView Name="MenuItem1ListView"
                           IsItemClickEnabled="True"
-                          ItemClick="MenuItemsListView_ItemClick_1"
-                             
-                    ItemsSource="{x:Bind menuitems}">
+                          ItemClick="MenuItem1ListView_ItemClick"                             
+                    ItemsSource="{x:Bind menuitem1}">
                         <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="data:MenuItems">
+                            <DataTemplate x:DataType="data:MenuItem1">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Height="50" Width="50"
                                        Source="{x:Bind icon}"
@@ -62,13 +61,28 @@
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
-                
-                
-                </SplitView.Pane>
+                    </ListView>-->
+                    <StackPanel>
+                    <Button Name="MyMusic"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Content="My Music"                    
+                    Height="45"
+                    Width="100"
+                    Click="MyMusic_Click"/>
+
+                    <Button Name="MyPlayLists"
+                    RelativePanel.Below="MyMusic"
+                    Content="My Playlists"                   
+                    Height="45"
+                    Width="100"
+                    Click="MyPlayLists_Click"/>
+                    </StackPanel>
+                </SplitView.Pane>             
 
 
-            <SplitView.Content>                
+
+
+                <SplitView.Content>                
                 <Grid Margin="20,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
