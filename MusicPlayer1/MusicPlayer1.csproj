@@ -128,6 +128,7 @@
     <Compile Include="Model\MusicManager.cs" />
     <Compile Include="Model\PlayList.cs" />
     <Compile Include="Model\PlayListManager.cs" />
+    <Compile Include="Model\SavePlayList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,30 @@
     <Content Include="Assets\Icons\MusicIcon.png" />
     <Content Include="Assets\Icons\MyMusic.jfif" />
     <Content Include="Assets\Icons\Playlist.png" />
+    <Content Include="Assets\Music\Beyonce_1.mp3" />
+    <Content Include="Assets\Music\Cheap Thrills.mp3" />
+    <Content Include="Assets\Music\Closer.mp3" />
+    <Content Include="Assets\Music\Counting stars.mp3" />
+    <Content Include="Assets\Music\Don%27t talk anymore.mp3" />
+    <Content Include="Assets\Music\Drag me down.mp3" />
+    <Content Include="Assets\Music\Flunk.mp3" />
+    <Content Include="Assets\Music\Grey Alive.mp3" />
+    <Content Include="Assets\Music\Hello.mp3" />
+    <Content Include="Assets\Music\Like me .mp3" />
+    <Content Include="Assets\Music\November rain.mp3" />
+    <Content Include="Assets\Music\Paradise.mp3" />
+    <Content Include="Assets\Music\Radioactive.mp3" />
+    <Content Include="Assets\Music\Rolling in The Deep.mp3" />
+    <Content Include="Assets\Music\Say Something.mp3" />
+    <Content Include="Assets\Music\See you again.mp3" />
+    <Content Include="Assets\Music\Shakira.mp3" />
+    <Content Include="Assets\Music\Shape of you.mp3" />
+    <Content Include="Assets\Music\Story of my life.mp3" />
+    <Content Include="Assets\Music\Stressed out.mp3" />
+    <Content Include="Assets\Music\Thinking out loud.mp3" />
+    <Content Include="Assets\Music\Waka Waka.mp3" />
+    <Content Include="Assets\Music\When i was your man.mp3" />
+    <Content Include="Assets\Music\You and me.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -162,6 +187,12 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.11</Version>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MyResources\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI.Xaml.Media.Imaging;
 //using Microsoft.UI.Xaml.Controls.Primitives.Popup;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -31,8 +32,12 @@ namespace MusicPlayer1
     {
         private ObservableCollection<Music> music;
         private ObservableCollection<PlayList> playlist;
+        private List<PlayList> playlistnames;
+
+
         public string ImageFile { get; set; }
         public string SongName { get; set; }
+        private Music CurrentMusic { get; set; }
         private List<MenuItem1> menuitem1;
         private List<MenuItem2> menuitem2;
 
@@ -62,6 +67,14 @@ namespace MusicPlayer1
             PlayListView.Visibility = Visibility.Collapsed;
             MusicListView.Visibility = Visibility.Visible;
 
+            playlistnames = new List<PlayList>();
+            foreach (var element in PlayListManager.GetPlayLists())
+            {
+                playlistnames.Add(element);
+            }
+
+
+
 
 
         }
@@ -85,6 +98,7 @@ namespace MusicPlayer1
         private void MusicListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Music userClickedItem = (Music)e.ClickedItem;
+            CurrentMusic = userClickedItem;
             string extension = Path.GetExtension(userClickedItem.FileName);
             if (extension == ".mp3")
             {
@@ -108,6 +122,7 @@ namespace MusicPlayer1
         {
             {
                 
+
             }
         }
 
@@ -127,8 +142,7 @@ namespace MusicPlayer1
         private void PlayListListView_ItemClick(object sender, ItemClickEventArgs e)
         {
       
-            //AllSongsListView.Visibility = Visibility.Collapsed;
-            //PlayListView.Visibility = Visibility.Collapsed;
+            
             
             
 
@@ -137,7 +151,19 @@ namespace MusicPlayer1
 
         private void MenuItem1ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-           
+            Music userClickedItem = (Music)e.ClickedItem;
+            
+            string extension = Path.GetExtension(userClickedItem.FileName);
+            if (extension == ".mp3")
+            {
+                MyMediaElement.Source = new Uri(this.BaseUri, userClickedItem.FileName);
+                MyMediaElement.Play();
+               // NowPlaying.Text = userClickedItem.SongName;
+                //BitmapImage bitmapImage = new BitmapImage();
+                //bitmapImage.UriSource = userClickedItem.ImageFile;
+                //CoverImage.Source = bitmapImage;
+            }
+
         }
 
         private void MyMusic_Click(object sender, RoutedEventArgs e)
@@ -152,7 +178,23 @@ namespace MusicPlayer1
         private void MyPlayLists_Click(object sender, RoutedEventArgs e)
         {
             MusicListView.Visibility = Visibility.Collapsed;
-            PlayListView.Visibility = Visibility.Visible;
+            PlayListView.Visibility = Visibility.Visible;            
+             //DisplayPlayList.PlayListsNames();
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentMusic != null)
+            {
+                string playListName = Input.Text;
+                var playList = new SavePlayList(playListName);
+                playList.Add(CurrentMusic);
+            }
+        }
+
+        private void ViewMyPlayListHeaders_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }
