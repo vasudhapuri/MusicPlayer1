@@ -122,13 +122,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\MenuItem1.cs" />
-    <Compile Include="Model\MenuItem2.cs" />
     <Compile Include="Model\Music.cs" />
     <Compile Include="Model\MusicManager.cs" />
     <Compile Include="Model\PlayList.cs" />
     <Compile Include="Model\PlayListManager.cs" />
-    <Compile Include="Model\SavePlayList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +134,15 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Icons\MusicIcon.png" />
-    <Content Include="Assets\Icons\MyMusic.jfif" />
-    <Content Include="Assets\Icons\Playlist.png" />
+    <Content Include="Assets\Icons\Playlist.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\MusicIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\MyMusic.jfif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Music\Beyonce_1.mp3" />
     <Content Include="Assets\Music\Cheap Thrills.mp3" />
     <Content Include="Assets\Music\Closer.mp3" />
@@ -155,15 +158,6 @@
     <Content Include="Assets\Music\Radioactive.mp3" />
     <Content Include="Assets\Music\Rolling in The Deep.mp3" />
     <Content Include="Assets\Music\Say Something.mp3" />
-    <Content Include="Assets\Music\See you again.mp3" />
-    <Content Include="Assets\Music\Shakira.mp3" />
-    <Content Include="Assets\Music\Shape of you.mp3" />
-    <Content Include="Assets\Music\Story of my life.mp3" />
-    <Content Include="Assets\Music\Stressed out.mp3" />
-    <Content Include="Assets\Music\Thinking out loud.mp3" />
-    <Content Include="Assets\Music\Waka Waka.mp3" />
-    <Content Include="Assets\Music\When i was your man.mp3" />
-    <Content Include="Assets\Music\You and me.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

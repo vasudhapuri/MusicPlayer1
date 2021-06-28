@@ -8,149 +8,129 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    
-        <Grid>
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <RelativePanel Grid.Row="0">
-            <Button Name="BackButton"
-                    RelativePanel.AlignLeftWithPanel="True"
-                    Content=" &#xE0A6;"
-                    FontFamily="Segoe MDL2 Assets"
-                    Height="45"
-                    Width="45"
-                    Click="BackButton_Click"
-                    />
-            <Button Name="HamburgerButton"
-                    RelativePanel.Below="BackButton"
-                    Content="&#xE700;"
-                    FontFamily="Segoe MDL2 Assets"
-                    Height="45"
-                    Width="45"
-                    Click="HamburgerButton_Click"
-                    />
+
 
         </RelativePanel>
-        <ScrollViewer Height="1500" Width="1500" 
-                  HorizontalScrollBarVisibility="Auto" 
-                  VerticalScrollBarVisibility="Auto">
 
-            <SplitView Grid.Row="1"
+
+        <SplitView Grid.Row="1"
                    Name="MySpiltView"
                    DisplayMode="CompactOverlay"
                    CompactPaneLength="150"
-                   OpenPaneLength="150">
+                   OpenPaneLength="250">
             <SplitView.Pane>
-                    
-                    <StackPanel>
+
+                <StackPanel>
+
                     <Button Name="MyMusic"
-                    RelativePanel.AlignLeftWithPanel="True"
+                   RelativePanel.AlignLeftWithPanel="True"
+                            FontFamily="Arial Rounded MT"
                     Content="My Music"                    
                     Height="45"
                     Width="150"
-                    Click="MyMusic_Click"/>
+                    Click="MyMusic_Click"
+                                HorizontalAlignment="Left"
+                            Background="Azure"
+                            Foreground="BlueViolet"/>
 
-                    <Button Name="MyPlayLists"
-                    RelativePanel.Below="MyMusic"
-                    Content="My Playlists"                   
-                    Height="45"
-                    Width="150"
-                    Click="MyPlayLists_Click"/>
-                        <ListView Name="TestMusicListView"
+                    <TextBlock   HorizontalAlignment="Left"
+                                      VerticalAlignment="Center"
+                                      RelativePanel.AlignLeftWithPanel="True"
+                                       Text="My PlayList"
+                                     FontFamily="Arial Rounded MT"
+                                     IsColorFontEnabled="True"
+                                     Foreground="BlueViolet"
+                                     Height="45"
+                                     Width="150"
+                                     />
+
+
+                    <ListView Name="PlaylistMusicListView"
                                           SelectionMode="None"
                                           IsItemClickEnabled="True"
                                           ItemClick="PlayListListView_ItemClick"
                                           ItemsSource="{x:Bind playlist}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="data:PlayList">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Name="MyImage"
-                                       Height="100"
-                                       Width="100" 
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="data:PlayList">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Name="MyImage"
+                                       Height="15"
+                                       Width="15" 
                                        Source="{x:Bind PlayListImage}"/>
-                                        <TextBlock 
+                                    <TextBlock 
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"                                                
                                                 Text="{x:Bind PlayListName}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </SplitView.Pane>
+
+
+
+
+            <SplitView.Content>
+                <Grid Margin="20,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Name="CategoryTextBlock"
+                               Text="All available Songs"
+                               FontSize="25"
+                               Grid.Row="0"
+                               Margin="20,-40,0,0"/>
+                    <Grid Margin="40,40,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <ListView Name="MusicListView"
+                                          SelectionMode="None"
+                                          IsItemClickEnabled="True"
+                                          ItemClick="MusicListView_ItemClick"
+                                          ItemsSource="{x:Bind music}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="data:Music">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Name="MyImage"
+                                       Height="55"
+                                       Width="55" 
+                                       Source="{x:Bind ImageFile}"/>
+                                        <TextBlock 
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"                                                
+                                                Text="{x:Bind SongName}" />
+
+
+
+
+
+
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
 
 
-                    </StackPanel>
-                </SplitView.Pane>             
 
 
-
-
-                <SplitView.Content>                
-                <Grid Margin="20,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                        <TextBlock Name="CategoryTextBlock"
-                               Text="All available Songs"
-                               FontSize="25"
-                               Grid.Row="0"
-                               Margin="20,-40,0,0"/>
-                        <Grid Margin="40,40,0,0">                        
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                            <ListView Name="MusicListView"
-                                          SelectionMode="None"
-                                          IsItemClickEnabled="True"
-                                          ItemClick="MusicListView_ItemClick"
-                                          ItemsSource="{x:Bind music}">
-                                <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="data:Music">                                    
-                                    <StackPanel Orientation="Horizontal">                                
-                                       <Image Name="MyImage"
-                                       Height="100"
-                                       Width="100" 
-                                       Source="{x:Bind ImageFile}"/>
-                                            <TextBlock 
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"                                                
-                                                Text="{x:Bind SongName}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-
-                            <ListView Name="PlayListView"
-                                          SelectionMode="None"
-                                          IsItemClickEnabled="True"
-                                          ItemClick="PlayListListView_ItemClick"
-                                         ItemsSource="{x:Bind playlist}" >
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="data:PlayList" >
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Name="MyImage"
-                                       Height="100"
-                                       Width="100" 
-                                       Source="{x:Bind PlayListImage}"/>
-                                            <TextBlock 
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"                                               
-                                                Text="{x:Bind PlayListName}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-
-
-                            <SplitView>
+                        <SplitView>
                             <SplitView.Content>
                                 <Grid Margin="0,10,0,0"
                                       HorizontalAlignment="Right" 
-                                      Width="500">
+                                      Width="650">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
@@ -167,76 +147,99 @@
                                                 Foreground="Green"
                                                 Content="&#xE102;"
                                                 FontFamily="Segoe MDL2 Assets"
-                                                Height="45"
-                                                Width="45"
-                                                Click="PlayButton_Click"/>
+                                                Height="50"
+                                                Width="50"
+                                                Click="PlayButton_Click"
+                                                BorderThickness="1"
+                                                    BorderBrush="Black"/>
 
                                         <Button Name="PauseButton"
                                                  Foreground="Purple"
                                                 RelativePanel.RightOf="PlayButton"
                                                 Content="&#xE103;"
                                                 FontFamily="Segoe MDL2 Assets"
-                                                Height="45"
-                                                Width="45"
-                                                Click="PauseButton_Click"/>
-                                        
-                                            <Button Name="RepeatButton"
+                                                Height="50"
+                                                Width="50"
+                                                Click="PauseButton_Click"
+                                                BorderThickness="1"
+                                                    BorderBrush="Black"/>
+
+                                        <Button Name="RepeatButton"
                                                      Foreground="Yellow"
                                                     RelativePanel.RightOf="StopButton"
                                                 Content="&#xE1CD;"
                                                 FontFamily="Segoe MDL2 Assets"
-                                                Height="45"
-                                                Width="45"
-                                                Click="RepeatButton_Click_1"/>
-                                        
-                                            <Button Name="StopButton"
+                                                Height="50"
+                                                Width="50"
+                                                Click="RepeatButton_Click_1"
+                                                    BorderThickness="1"
+                                                    BorderBrush="Black"/>
+
+                                        <Button Name="StopButton"
                                                     Foreground="Red"
                                                     RelativePanel.RightOf="PauseButton"
                                                 Content="&#xE739;"
-                                                FontFamily="Segoe MDL2 Assets"
-                                                    
-                                                Height="45"
-                                                Width="45"
-                                                Click="RepeatButton_Click_1"/>
+                                                FontFamily="Segoe MDL2 Assets"                                                  
+                                                Height="50"
+                                                Width="50"
+                                                Click="StopButton_Click"
+                                                    BorderThickness="1"
+                                                    BorderBrush="Black"/>
 
-                                            <Button Name="AddToList"
+                                        <Button Name="AddToList"
                                                     Foreground="Blue"
                                                 RelativePanel.RightOf="RepeatButton"
                                                 Content="&#xE109;"
                                                 FontFamily="Segoe MDL2 Assets"
-                                                Height="45"
-                                                Width="45"                                                
-                                                Click="AddToList_Click">
+                                                Height="50"
+                                                Width="50"                                                
+                                                
+                                                    BorderThickness="1"
+                                                    BorderBrush="Black">
 
-                                                <Button.Flyout>
-                                                      <Flyout Placement="Bottom">
-                                                        <StackPanel>
-                                                            <TextBox x:Name="Input"
-                                                   Header="Enter the playlist name:" PlaceholderText="Name"
-                                      Width="300" HorizontalAlignment="Left"> </TextBox>
+                                            <Button.Flyout>
+                                                <Flyout Placement="Bottom">
+                                                    <StackPanel>
+                                                        <TextBox x:Name="Input"
+                                                   Header="Created by you:"
+                                                          FontFamily="Arial"
+                                                         
+                                                        PlaceholderText="Playlsit Name"
+                                      Width="300" HorizontalAlignment="Left"></TextBox>
 
-                                                            <Button Name="Add"
-                                        Content="Add"
+                                                        <TextBox x:Name="OtherDetailsInput"                                                   
+                                                          FontFamily="Arial"                                                         
+                                                        PlaceholderText="Enter any othe details"
+                                      Width="500" HorizontalAlignment="Left"></TextBox>
+
+
+                                                        <Button Name="CreatePlaylist"
+                                                                    Click="CreatePlaylist_Click"
+                                                                    Foreground="BlueViolet"
+                                        Content="Create Playlist"
                                                 FontFamily="Segoe UI Light"
-                                                Height="45"
-                                                Width="45"                />
-                                                            <!--Click="Add_Click"/>-->
-                                                            
-                                                        </StackPanel>
-                                                    </Flyout>
-                                                    
-                                                </Button.Flyout> 
+                                                                FontWeight="ExtraBold"
+                                                Height="50"
+                                                Width="120"                />
 
-                                            </Button>
+
+                                                    </StackPanel>
+                                                </Flyout>
+
+                                            </Button.Flyout>
+
+                                        </Button>
 
 
                                     </RelativePanel>
-                       
-                    </Grid>
+
+                                </Grid>
                             </SplitView.Content>
                         </SplitView>
-                           
-                        </Grid>
+
+                    </Grid>
+                    <TextBlock x:Name="textBlock" Text="txt" HorizontalAlignment="Left" Margin="646,215,0,0" Grid.Row="1"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+
 
                 </Grid>
 
@@ -244,7 +247,7 @@
 
 
         </SplitView>
-    </ScrollViewer>
+
 
 
     </Grid>

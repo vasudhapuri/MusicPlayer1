@@ -13,7 +13,7 @@ namespace MusicPlayer1.Model
         private static string extension { get; set; }
         private static string ImageFile { get; set; }
 
-        //Getting All Music from local drive
+        //Getting Music (mp3) from special folder path
 
         public static void GetMusics(ObservableCollection<Music> music)
         {
@@ -29,18 +29,8 @@ namespace MusicPlayer1.Model
                 {
                     string extension = Path.GetExtension(file);
 
-                    if (extension == ".png" || extension == ".jfif")
+                    if (extension == ".mp3")
                     {
-                        ImageFile = file;
-                    }
-                }
-
-                foreach (string file in files)
-                {
-                    string extension = Path.GetExtension(file);
-
-                    if (!(extension == ".png" || extension == ".jfif"))
-                        {
                         string MusicName = Path.GetFileNameWithoutExtension(file);
 
                         music.Add(new Music(file, ImageFile, MusicName));
