@@ -28,25 +28,19 @@ namespace MusicPlayer1
     {
         private ObservableCollection<Music> music;
         private ObservableCollection<PlayList> playlist;
+        private string nextButtonText { get; set; }
 
-
-        //public string ImageFile { get; set; }
-        //public string SongName { get; set; }
         private Music CurrentMusic { get; set; }
-
-
 
         public MainPage()
         {
             this.InitializeComponent();
             music = new ObservableCollection<Music>();
             MusicManager.GetMusics(music);
-
             playlist = new ObservableCollection<PlayList>();
             PlayListManager.GetPlayList(playlist);
-
             MusicListView.Visibility = Visibility.Visible;
-
+            textBlock.Text = string.Empty;
         }
 
 
@@ -61,58 +55,42 @@ namespace MusicPlayer1
                 MyMediaElement.Play();
             }
         }
-
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
             MyMediaElement.Pause();
         }
-
-        private void RepeatButton_Click_1(object sender, RoutedEventArgs e)
+        private void RepeatButton_Click(object sender, RoutedEventArgs e)
         {
 
             MyMediaElement.Position = TimeSpan.Zero;
             MyMediaElement.Play();
         }
 
-
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             MyMediaElement.Play();
 
         }
-
-
         private void PlayListListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
             PlayList userClickedPlayList = (PlayList)e.ClickedItem;
-
-
             music.Clear();
             foreach (var song in userClickedPlayList.songs)
             {
                 music.Add(song);
             }
-
-
+            textBlock.Text = userClickedPlayList.PlayListOtherDetails;
         }
-
-
-
         private void MyMusic_Click(object sender, RoutedEventArgs e)
         {
             MusicManager.GetMusics(music);
             MusicListView.Visibility = Visibility.Visible;
-
-
-
+            textBlock.Text = string.Empty;
         }
-
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
             MyMediaElement.Stop();
         }
-
         private void CreatePlaylist_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentMusic != null)
@@ -122,11 +100,36 @@ namespace MusicPlayer1
                 var playList = new PlayList(playListName, playListOtherDetails);
                 playList.Add(CurrentMusic);
             }
-
             playlist.Clear();
             PlayListManager.GetPlayList(playlist);
+            PlayListAddFlyout.Hide();
+            Input.Text = String.Empty;
+            OtherDetailsInput.Text = String.Empty;
         }
 
 
+        private async void Browse_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker();
+            openPicker.ViewMode = PickerViewMode.Thumbnail;
+            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.FileTypeFilter.Add(".png");
+            StorageFile file = await openPicker.PickSingleFileAsync();
+            if (file != null)
+            {
+                Browse_path.Text =  file.Name;
+                var i = file.GetThumbnailAsync(Windows.Storage.FileProperties.ThumbnailMode.PicturesView);
+
+            }
+            else
+            {
+                //  
+            }
+        }
+
     }
 }
+
+

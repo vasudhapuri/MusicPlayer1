@@ -12,48 +12,34 @@ namespace MusicPlayer1.Model
 {
     public static class PlayListManager
     {
-        public static void GetPlayList(ObservableCollection<PlayList> pl)
+        public static void GetPlayList(ObservableCollection<PlayList> play)
         {
             var allplaylists = GetPlayLists();
-            foreach (var element in allplaylists)
-            {
-                pl.Add(element);
-
-            }
-
+            allplaylists.ForEach(song => play.Add(song));
         }
         public static string[] PlayListsPath()
         {
-
             var result = new List<PlayList>();
-
             var location = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-
-
-
             string playListDirectory = $@"{location}\Assets\PlayLists";
-
-
-
-            string[] playlistfilename = Directory.GetFiles($@"{location}\Assets\PlayLists");
+            string[] playlistfilename = Directory.GetFiles(playListDirectory);
+                //($@"{location}\Assets\PlayLists");
             return playlistfilename;
-
         }
 
         public static List<PlayList> GetPlayLists()
         {
             var playlist = new List<PlayList>(); //stores filenames
-
             string[] playlistpath = PlayListsPath();  // this returns all files(names) in the directory local/assets/playlist
             foreach (var ele in playlistpath)
             {
-                playlist.Add(new PlayList(Path.GetFileName(ele).Split(".")[0]));
+                string Text = System.IO.File.ReadAllText(ele);
+                playlist.Add(JsonConvert.DeserializeObject<PlayList>(Text));
+
+                //playlist.Add(new PlayList(Path.GetFileName(ele).Split(".")[0]));
             }
             return playlist;
         }
-
-
-
 
     }
 

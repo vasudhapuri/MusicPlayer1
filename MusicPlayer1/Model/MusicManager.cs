@@ -13,31 +13,23 @@ namespace MusicPlayer1.Model
         private static string extension { get; set; }
         private static string ImageFile { get; set; }
 
-        //Getting Music (mp3) from special folder path
-
+        //Getting Music (mp3 files only) from special folder path
         public static void GetMusics(ObservableCollection<Music> music)
         {
-            string root = Windows.ApplicationModel.Package.Current.InstalledLocation.Path;
-            string path = root + @"\Assets\Music";
+            string path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path + @"\Assets\Music";
             music.Clear();
-
-            string[] files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
-
+            string[] files = Directory.GetFiles(path, "*.mp3*", SearchOption.AllDirectories);
             if (files.Length > 0)
             {
                 foreach (string file in files)
                 {
-                    string extension = Path.GetExtension(file);
-
-                    if (extension == ".mp3")
-                    {
-                        string MusicName = Path.GetFileNameWithoutExtension(file);
-
-                        music.Add(new Music(file, ImageFile, MusicName));
-                    }
+                    string MusicName = Path.GetFileNameWithoutExtension(file); //refers to songname in Music class constructor
+                    music.Add(new Music(file, MusicName));
                 }
+                
             }
-
         }
+
     }
 }
+

@@ -42,6 +42,7 @@
                             Foreground="BlueViolet"/>
 
                     <TextBlock   HorizontalAlignment="Left"
+                                 Margin="37,0,0,0"
                                       VerticalAlignment="Center"
                                       RelativePanel.AlignLeftWithPanel="True"
                                        Text="My PlayList"
@@ -54,6 +55,7 @@
 
 
                     <ListView Name="PlaylistMusicListView"
+                              Margin="20,0,20,0"
                                           SelectionMode="None"
                                           IsItemClickEnabled="True"
                                           ItemClick="PlayListListView_ItemClick"
@@ -95,8 +97,9 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-
+                        <TextBlock x:Name="textBlock" Text="txt"  HorizontalAlignment="Left"  Grid.Row="0"  TextWrapping="Wrap" VerticalAlignment="Top"/>
                         <ListView Name="MusicListView"
+                                  Grid.Row="1"
                                           SelectionMode="None"
                                           IsItemClickEnabled="True"
                                           ItemClick="MusicListView_ItemClick"
@@ -112,12 +115,6 @@
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"                                                
                                                 Text="{x:Bind SongName}" />
-
-
-
-
-
-
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -171,7 +168,7 @@
                                                 FontFamily="Segoe MDL2 Assets"
                                                 Height="50"
                                                 Width="50"
-                                                Click="RepeatButton_Click_1"
+                                                Click="RepeatButton_Click"
                                                     BorderThickness="1"
                                                     BorderBrush="Black"/>
 
@@ -198,12 +195,11 @@
                                                     BorderBrush="Black">
 
                                             <Button.Flyout>
-                                                <Flyout Placement="Bottom">
+                                                <Flyout x:Name="PlayListAddFlyout" Placement="Bottom">
                                                     <StackPanel>
                                                         <TextBox x:Name="Input"
                                                    Header="Created by you:"
-                                                          FontFamily="Arial"
-                                                         
+                                                          FontFamily="Arial"                                                         
                                                         PlaceholderText="Playlsit Name"
                                       Width="300" HorizontalAlignment="Left"></TextBox>
 
@@ -212,7 +208,6 @@
                                                         PlaceholderText="Enter any othe details"
                                       Width="500" HorizontalAlignment="Left"></TextBox>
 
-
                                                         <Button Name="CreatePlaylist"
                                                                     Click="CreatePlaylist_Click"
                                                                     Foreground="BlueViolet"
@@ -220,14 +215,29 @@
                                                 FontFamily="Segoe UI Light"
                                                                 FontWeight="ExtraBold"
                                                 Height="50"
-                                                Width="120"                />
+                                                Width="120" />
 
+                                                        <Button x:Name="Browse" 
+                                                                   Content="Browse Image"
+                                                                   Margin="0,20,0,20"
+                                                                Click="Browse_Click"
+                                                                   
+                                                          FontFamily="Arial"                                                         
+                                                        Width="200" HorizontalAlignment="Left"></Button>
 
-                                                    </StackPanel>
+                                                        <TextBlock x:Name="Browse_path">
+                                                            
+                                                        </TextBlock>
+
+                                                        <Image x:Name="imagebrowse"
+                                                                Width="100"
+                                                                Height="100">
+                                                            
+                                                        </Image>                                                           
+                                                                
+                                                        </StackPanel>
                                                 </Flyout>
-
                                             </Button.Flyout>
-
                                         </Button>
 
 
@@ -238,7 +248,7 @@
                         </SplitView>
 
                     </Grid>
-                    <TextBlock x:Name="textBlock" Text="txt" HorizontalAlignment="Left" Margin="646,215,0,0" Grid.Row="1"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <!--<TextBlock x:Name="textBlock" Text="txt"  HorizontalAlignment="Left" Margin="500,150,0,0" Grid.Row="1"  TextWrapping="Wrap" VerticalAlignment="Top"/>-->
 
 
                 </Grid>
