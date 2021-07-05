@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.FileProperties;
 
 namespace MusicPlayer1.Model
 {
@@ -17,29 +18,25 @@ namespace MusicPlayer1.Model
         public string PlayListImage { get; set; }
         public string PlayListLocation { get; set; }
 
-        //public PlayList(string PlayListName, List<Music> songs, string playlistotherdetails, string PlayListImage, string PlayListLocation) 
-        //{
-
-        //    this.PlayListName = PlayListName;
-        //    this.PlayListOtherDetails = playlistotherdetails;
-        //    this.PlayListImage = PlayListImage;
-        //    this.PlayListLocation = PlayListLocation;
-        //    this.songs = new List<Music>();
-        //    foreach (var c in songs)
-        //        this.songs.Add(c);
-        //}
         public PlayList()
         {
 
         }
-        public PlayList(string playlistname, string playlistotherdetails) : this(playlistname)
+        public PlayList(string playlistname, string playlistotherdetails,string browsedimage) : this(playlistname)
         {
+
             PlayListOtherDetails = playlistotherdetails;
+            //PlayListImage = browsedimage;
+            PlayListImage = $"Assets/Icons/Playlist.png";
         }
         public PlayList(string playlistname)
         {
+           
             PlayListName = playlistname;
             PlayListImage = $"Assets/Icons/Playlist.png";
+            
+
+
             var location = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string playListDirectory = $@"{location}\Assets\PlayLists";
 

@@ -66,7 +66,12 @@
                                     <Image Name="MyImage"
                                        Height="15"
                                        Width="15" 
-                                       Source="{x:Bind PlayListImage}"/>
+                                       Source="{Binding PlayListImage}"
+                                           
+
+                                       
+
+                                        />
                                     <TextBlock 
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"                                                
@@ -184,18 +189,19 @@
                                                     BorderBrush="Black"/>
 
                                         <Button Name="AddToList"
+                                                Click="AddToList_Click"
                                                     Foreground="Blue"
                                                 RelativePanel.RightOf="RepeatButton"
                                                 Content="&#xE109;"
                                                 FontFamily="Segoe MDL2 Assets"
                                                 Height="50"
-                                                Width="50"                                                
+                                                Width="50"                                             
                                                 
                                                     BorderThickness="1"
                                                     BorderBrush="Black">
 
                                             <Button.Flyout>
-                                                <Flyout x:Name="PlayListAddFlyout" Placement="Bottom">
+                                                <Flyout x:Name="PlayListAddFlyout" Placement="Bottom" LightDismissOverlayMode="Off" >
                                                     <StackPanel>
                                                         <TextBox x:Name="Input"
                                                    Header="Created by you:"
@@ -205,7 +211,7 @@
 
                                                         <TextBox x:Name="OtherDetailsInput"                                                   
                                                           FontFamily="Arial"                                                         
-                                                        PlaceholderText="Enter any othe details"
+                                                        PlaceholderText="Enter new/updated playlist details"
                                       Width="500" HorizontalAlignment="Left"></TextBox>
 
                                                         <Button Name="CreatePlaylist"
@@ -231,7 +237,8 @@
 
                                                         <Image x:Name="imagebrowse"
                                                                 Width="100"
-                                                                Height="100">
+                                                                Height="100"
+                                                               Source="browsedImage">
                                                             
                                                         </Image>                                                           
                                                                 

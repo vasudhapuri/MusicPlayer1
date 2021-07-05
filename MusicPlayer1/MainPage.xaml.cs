@@ -19,7 +19,8 @@ using Windows.UI.Popups;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml.Media.Imaging;
-
+using Windows.Storage.FileProperties;
+using System.Threading.Tasks;
 
 namespace MusicPlayer1
 {
@@ -31,6 +32,9 @@ namespace MusicPlayer1
         private string nextButtonText { get; set; }
 
         private Music CurrentMusic { get; set; }
+        public string browsedImage { get; set; }
+
+        PlayList userClickedPlayListCurr;
 
         public MainPage()
         {
@@ -41,6 +45,10 @@ namespace MusicPlayer1
             PlayListManager.GetPlayList(playlist);
             MusicListView.Visibility = Visibility.Visible;
             textBlock.Text = string.Empty;
+
+        
+
+
         }
 
 
@@ -74,6 +82,7 @@ namespace MusicPlayer1
         private void PlayListListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             PlayList userClickedPlayList = (PlayList)e.ClickedItem;
+            userClickedPlayListCurr = userClickedPlayList;
             music.Clear();
             foreach (var song in userClickedPlayList.songs)
             {
@@ -96,8 +105,25 @@ namespace MusicPlayer1
             if (CurrentMusic != null)
             {
                 string playListName = Input.Text;
-                string playListOtherDetails = OtherDetailsInput.Text;
-                var playList = new PlayList(playListName, playListOtherDetails);
+                string playListOtherDetails = string.Empty;
+                if (!String.IsNullOrEmpty(OtherDetailsInput.Text))
+                {
+                    playListOtherDetails = OtherDetailsInput.Text;
+                }
+                else if (userClickedPlayListCurr != null && !String.IsNullOrEmpty(userClickedPlayListCurr.PlayListOtherDetails))
+                {
+                    playListOtherDetails = userClickedPlayListCurr.PlayListOtherDetails;
+                }
+                    
+
+                
+                var location = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string playListImageDirectory = $@"{location}\Assets\PlayListsImage";
+                string imageDestination = $@"{playListImageDirectory}\{playListName}{Path.GetExtension(browsedImage)}";
+
+                //File.Copy(browsedImage, imageDestination);
+
+                var playList = new PlayList(playListName, playListOtherDetails, browsedImage);
                 playList.Add(CurrentMusic);
             }
             playlist.Clear();
@@ -105,11 +131,14 @@ namespace MusicPlayer1
             PlayListAddFlyout.Hide();
             Input.Text = String.Empty;
             OtherDetailsInput.Text = String.Empty;
+            Browse_path.Text = String.Empty;
+
         }
 
 
-        private async void Browse_Click(object sender, RoutedEventArgs e)
+        private  async void Browse_Click(object sender, RoutedEventArgs e)
         {
+            //StorageItemThumbnail browsedImage = null; ;
             FileOpenPicker openPicker = new FileOpenPicker();
             openPicker.ViewMode = PickerViewMode.Thumbnail;
             openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
@@ -117,18 +146,21 @@ namespace MusicPlayer1
             openPicker.FileTypeFilter.Add(".jpeg");
             openPicker.FileTypeFilter.Add(".png");
             StorageFile file = await openPicker.PickSingleFileAsync();
+
             if (file != null)
             {
                 Browse_path.Text =  file.Name;
-                var i = file.GetThumbnailAsync(Windows.Storage.FileProperties.ThumbnailMode.PicturesView);
+                 browsedImage =  file.Path;
+            }
+            
+            
 
-            }
-            else
-            {
-                //  
-            }
         }
 
+        private void AddToList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
 

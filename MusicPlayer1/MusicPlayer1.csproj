@@ -145,18 +145,14 @@
     </Content>
     <Content Include="Assets\Music\Beyonce_1.mp3" />
     <Content Include="Assets\Music\Cheap Thrills.mp3" />
-    <Content Include="Assets\Music\Closer.mp3" />
     <Content Include="Assets\Music\Counting stars.mp3" />
     <Content Include="Assets\Music\Don%27t talk anymore.mp3" />
     <Content Include="Assets\Music\Drag me down.mp3" />
-    <Content Include="Assets\Music\Flunk.mp3" />
     <Content Include="Assets\Music\Grey Alive.mp3" />
     <Content Include="Assets\Music\Hello.mp3" />
     <Content Include="Assets\Music\Like me .mp3" />
     <Content Include="Assets\Music\November rain.mp3" />
     <Content Include="Assets\Music\Paradise.mp3" />
-    <Content Include="Assets\Music\Radioactive.mp3" />
-    <Content Include="Assets\Music\Rolling in The Deep.mp3" />
     <Content Include="Assets\Music\Say Something.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
